@@ -48,3 +48,18 @@ def signin(request):
             return redirect("signin")
 
     return render(request, "signin.html")
+
+def contact_us(request):
+    context = {}
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        obj = Contact(name=name, email=email, subject=subject, message=message)
+        obj.save()
+        context['message'] = f"Dear {name}, Thanks for your time!"
+
+    return render(request, "contact.html")
+
