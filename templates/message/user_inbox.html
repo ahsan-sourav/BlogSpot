@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}My Inbox{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-gradient-to-r from-green-500 to-teal-600 rounded-lg shadow-lg p-6 mb-8">
+        <div class="flex items-center">
+            <div class="bg-white bg-opacity-20 rounded-full p-3 mr-4">
+                <i class="fas fa-inbox text-2xl text-white"></i>
+            </div>
+            <div>
+                <h1 class="text-3xl font-bold text-white mb-1">My Inbox</h1>
+                <p class="text-white text-opacity-90">View replies from bloggers</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Inbox Header -->
+        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <h2 class="text-lg font-semibold text-gray-700">
+                    <i class="fas fa-envelope mr-2 text-teal-500"></i> Messages
+                </h2>
+                <span class="bg-teal-500 text-white text-sm font-medium px-3 py-1 rounded-full">
+                    {{ messages_received.count }} messages
+                </span>
+            </div>
+        </div>
+        
+        <!-- Messages List -->
+        <div class="divide-y divide-gray-200">
+            {% for message in messages_received %}
+            <div class="p-6 hover:bg-gray-50 transition duration-150 {% if not message.is_read %}bg-blue-50{% endif %}">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4">
+                        {% if message.sender.blogger_profile.profile_picture %}
+                        <img src="{{ message.sender.blogger_profile.profile_picture.url }}" alt="{{ message.sender.username }}" class="h-12 w-12 rounded-full object-cover">
+                        {% else %}
+                        <div class="h-12 w-12 rounded-full bg-gradient-to-r from-purple-400 to-indigo-500 flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">{{ message.sender.username|slice:":1"|upper }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between">
+                            <p class="text-sm font-medium text-indigo-600 flex items-center">
+                                {{ message.sender.username }}
+                                <span class="ml-2 px-2 py-0.5 text-xs font-medium bg-teal-100 text-teal-800 rounded-full">
+                                    Blogger
+                                </span>
+                            </p>
+                            <span class="text-xs text-gray-500">
+                                {{ message.created_at|date:"M d, Y" }} at {{ message.created_at|time:"g:i A" }}
+                            </span>
+                        </div>
+                        
+                        <div class="mt-2 text-sm text-gray-700">
+                            <p>{{ message.content }}</p>
+                        </div>
+                        
+                        {% if not message.is_read %}
+                        <div class="mt-2">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                                <i class="fas fa-circle text-xs mr-1"></i> New
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="p-8 text-center">
+                <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 mb-4">
+                    <i class="fas fa-inbox-in text-2xl text-gray-400"></i>
+                </div>
+                <h3 class="text-gray-500 font-medium mb-1">Your inbox is empty</h3>
+                <p class="text-gray-400 text-sm">Messages from bloggers will appear here</p>
+                <a href="{% url 'bloggers_list' %}" class="mt-4 inline-flex items-center px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition duration-300">
+                    <i class="fas fa-users mr-2"></i> Browse Bloggers
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

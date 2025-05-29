@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+{% block title %}All Blogs{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <!-- Hero Header Section -->
+    <div class="relative mb-12 rounded-2xl overflow-hidden shadow-xl">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-purple-600/90 z-10"></div>
+        <div class="absolute inset-0 bg-[url('/static/images/pattern.svg')] opacity-10 z-0"></div>
+        <div class="relative z-20 py-16 px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in">
+                <i class="fas fa-book-reader mr-3"></i>Explore Our Blog
+            </h1>
+            <p class="text-xl text-blue-100 max-w-2xl mx-auto animate-fade-in-delay">
+                Discover insights, tips, and stories from our community of writers
+            </p>
+        </div>
+    </div>
+    
+    <!-- Search and Filter Bar -->
+    <div class="bg-white rounded-xl shadow-md p-4 mb-8 animate-slide-up">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="relative flex-grow max-w-md">
+                <input type="text" placeholder="Search blogs..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <span class="text-gray-700"><i class="fas fa-filter mr-2"></i>Sort by:</span>
+                <select class="rounded-lg border border-gray-300 px-2 py-1 focus:ring-2 focus:ring-blue-400 focus:border-blue-400">
+                    <option>Latest</option>
+                    <option>Most Popular</option>
+                    <option>Trending</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Categories Section -->
+    <div class="mb-10 animate-slide-up-delay">
+        <h2 class="text-2xl font-bold mb-4 flex items-center text-gray-800">
+            <i class="fas fa-tags text-blue-500 mr-2"></i>Popular Categories
+        </h2>
+        <div class="flex flex-wrap gap-3">
+            <a href="{% url 'blog_page' %}" class="category-pill {% if not request.GET.category %}active-category{% endif %}">
+                <i class="fas fa-globe-americas"></i>
+                <span>All</span>
+            </a>
+            
+            {% for category in categories %}
+                <a href="{% url 'blog_page' %}?category={{ category.id }}" 
+                   class="category-pill {% if request.GET.category == category.id|stringformat:'i' %}active-category{% endif %}">
+                    <i class="
+                    {% if category.name == 'Technology' %}fas fa-laptop-code
+                    {% elif category.name == 'Travel' %}fas fa-plane-departure
+                    {% elif category.name == 'Food' %}fas fa-utensils
+                    {% elif category.name == 'Health' %}fas fa-heartbeat
+                    {% elif category.name == 'Business' %}fas fa-briefcase
+                    {% elif category.name == 'Lifestyle' %}fas fa-coffee
+                    {% elif category.name == 'Science' %}fas fa-flask
+                    {% elif category.name == 'Art' %}fas fa-paint-brush
+                    {% else %}fas fa-bookmark{% endif %}"></i>
+                    <span>{{ category.name }}</span>
+                </a>
+            {% empty %}
+                <p class="text-gray-500 italic">No categories available.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Blog Cards Grid -->
+    <div class="mt-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center text-gray-800">
+            <i class="far fa-newspaper text-blue-500 mr-2"></i>
+            {% if request.GET.category %}
+                {% with category_name=categories|dictsort:"id"|dictsortreversed:"id" %}
+                    Posts in {{ category_name.0.name }}
+                {% endwith %}
+            {% else %}
+                Latest Posts
+            {% endif %}
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for blog in blogs %}
+                <div class="blog-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="relative">
+                        <!-- Blog Image -->
+                        <div class="h-52 overflow-hidden">
+                            {% if blog.image %}
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                            {% else %}
+                                <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                                    <i class="fas fa-image text-white text-4xl"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Category Badge -->
+                        <div class="absolute top-3 right-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md">
+                                <i class="fas fa-tag mr-1"></i>{{ blog.category.name }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5">
+                        <!-- Blog Meta Info -->
+                        <div class="flex items-center mb-3 text-sm text-gray-500">
+                            <div class="flex items-center">
+                                {% if blog.author.profile_image %}
+                                    <img src="{{ blog.author.profile_image.url }}" alt="{{ blog.author.user.username }}" class="w-8 h-8 rounded-full mr-2 border-2 border-blue-500">
+                                {% else %}
+                                    <div class="w-8 h-8 rounded-full mr-2 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                {% endif %}
+                                <span>{{ blog.author.user.username }}</span>
+                            </div>
+                            <span class="mx-2">•</span>
+                            <span><i class="far fa-calendar-alt mr-1"></i>{{ blog.created_at|date:"M d, Y" }}</span>
+                        </div>
+                        
+                        <!-- Blog Title and Excerpt -->
+                        <h3 class="text-xl font-bold mb-2 text-gray-800 hover:text-blue-600 transition-colors line-clamp-2">{{ blog.title }}</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-3">{{ blog.content|truncatechars:120 }}</p>
+                        
+                        <!-- Action Buttons -->
+                        <div class="pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <div class="flex space-x-3 text-gray-500 text-sm">
+                                <span><i class="far fa-eye mr-1"></i>{{ blog.total_views|default:"0" }}</span>
+                                <span><i class="far fa-heart mr-1"></i>{{ blog.likes.count|default:"0" }}</span>
+                                <span><i class="far fa-comment mr-1"></i>{{ blog.comments.count|default:"0" }}</span>
+                            </div>
+                            <a href="{% url 'read_blog' blog.slug %}" class="inline-flex items-center text-white px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg transition-all">
+                                Read More <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-span-3 py-16 text-center bg-white rounded-xl shadow-md">
+                    <div class="text-gray-400 mb-4 animate-bounce">
+                        <i class="fas fa-inbox text-6xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">No blogs found</h3>
+                    <p class="text-gray-500 mb-6">
+                        {% if request.GET.category %}
+                            There are no blogs in this category yet.
+                        {% else %}
+                            No blogs have been published yet. Check back soon!
+                        {% endif %}
+                    </p>
+                    <a href="{% url 'blog_page' %}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all">
+                        <i class="fas fa-home mr-2"></i>Return to All Blogs
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if blogs.paginator %}
+        <div class="mt-12 flex justify-center">
+            <div class="inline-flex rounded-lg shadow-sm">
+                {% if blogs.has_previous %}
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page=1" class="px-4 py-2 border border-gray-300 rounded-l-lg bg-white text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ blogs.previous_page_number }}" class="px-4 py-2 border-t border-b border-r border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                {% endif %}
+                
+                <span class="px-6 py-2 border-t border-b border-gray-300 bg-blue-50 text-blue-600 font-medium">
+                    {{ blogs.number }} of {{ blogs.paginator.num_pages }}
+                </span>
+                
+                {% if blogs.has_next %}
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ blogs.next_page_number }}" class="px-4 py-2 border-t border-b border-r border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ blogs.paginator.num_pages }}" class="px-4 py-2 border-t border-b border-r border-gray-300 rounded-r-lg bg-white text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in-delay {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 0.3s forwards;
+    }
+    
+    .animate-slide-up {
+        animation: slideUp 0.6s ease-out forwards;
+    }
+    
+    .animate-slide-up-delay {
+        opacity: 0;
+        animation: slideUp 0.6s ease-out 0.2s forwards;
+    }
+    
+    /* Category Pills */
+    .category-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background-color: white;
+        color: #4B5563;
+        border-radius: 9999px;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .category-pill i {
+        margin-right: 0.5rem;
+    }
+    
+    .category-pill:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .active-category {
+        background: linear-gradient(to right, #3B82F6, #8B5CF6);
+        color: white;
+    }
+    
+    /* Blog Cards */
+    .blog-card {
+        transition: transform 0.3s ease;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Line Clamping */
+    .line-clamp-2 {
+        display: -webkit-box;
+        
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .line-clamp-3 {
+        display: -webkit-box;
+       
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animate blog cards on scroll
+        const blogCards = document.querySelectorAll('.blog-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.1,
+            rootMargin: '0px'
+        });
+        
+        blogCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}

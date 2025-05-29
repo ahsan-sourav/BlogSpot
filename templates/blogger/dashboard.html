@@ -1,0 +1,60 @@
+{% extends "sidebar.html" %}
+{% block title %}Blogger Dashboard{% endblock %}
+{% block content %}
+<div class="max-w-5xl mx-auto bg-white shadow-md rounded-lg p-6 mt-6">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">
+        Welcome, {{ user.username }}! Here’s your dashboard.
+    </h2>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="p-4 bg-blue-100 border-l-4 border-blue-500 rounded">
+            <h3 class="text-lg font-bold text-blue-600">{{ total_blogs }}</h3>
+            <p class="text-gray-600">Total Blogs</p>
+        </div>
+        <div class="p-4 bg-green-100 border-l-4 border-green-500 rounded">
+            <h3 class="text-lg font-bold text-green-600">{{ total_views }}</h3>
+            <p class="text-gray-600">Total Views</p>
+        </div>
+        <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded">
+            <h3 class="text-lg font-bold text-yellow-600">{{ total_likes }}</h3>
+            <p class="text-gray-600">Total Likes</p>
+        </div>
+        <div class="p-4 bg-red-100 border-l-4 border-red-500 rounded">
+            <h3 class="text-lg font-bold text-red-600">{{ total_comments }}</h3>
+            <p class="text-gray-600">Total Comments</p>
+        </div>
+    </div>
+
+    <!-- Recent Comments -->
+    <h3 class="text-xl font-semibold text-gray-700 mb-2">Recent Comments</h3>
+    <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+        {% for comment in recent_comments %}
+            <div class="mb-2 p-2 border-b">
+                <p class="text-gray-700"><strong>{{ comment.user.username }}</strong> commented on <a href="{% url 'read_blog' comment.blog.slug %}" class="text-blue-500 hover:underline">{{ comment.blog.title }}</a></p>
+                <p class="text-gray-600">{{ comment.content }}</p>
+                <p class="text-sm text-gray-500">{{ comment.created_at|date:"M d, Y" }}</p>
+            </div>
+        {% empty %}
+            <p class="text-gray-500">No recent comments.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Blogger Blogs List -->
+    <h3 class="text-xl font-semibold text-gray-700 mt-6">Your Blogs</h3>
+    <div class="mt-4">
+        {% for blog in blogs %}
+        <div class="p-4 border rounded-lg shadow-sm mb-2">
+            <h4 class="text-lg font-bold">
+                <a href="{% url 'read_blog' blog.slug %}" class="text-blue-500 hover:underline">
+                    {{ blog.title }}
+                </a>
+            </h4>
+            <p class="text-sm text-gray-500">Views: {{ blog.total_views }} | Likes: {{ blog.likes.count }} | Comments: {{ blog.comments.count }}</p>
+        </div>
+        {% empty %}
+        <p class="text-gray-500">You haven't posted any blogs yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

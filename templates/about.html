@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block title %}
+About
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-xl overflow-hidden mb-16">
+        <div class="md:flex">
+            <div class="p-8 md:p-12 md:w-1/2">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-6">About Our BlogSpot</h1>
+                <p class="text-blue-100 text-lg mb-8">Discover our story, mission, and the passionate team behind the content you love.</p>
+                <div class="flex items-center">
+                    <i class="fas fa-quote-left text-3xl text-blue-300 mr-4"></i>
+                    <p class="italic text-white">Sharing knowledge, inspiring minds, and building community.</p>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Blog Team" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="mb-16">
+        <div class="flex items-center mb-8">
+            <i class="fas fa-book-open text-2xl text-indigo-600 mr-4"></i>
+            <h2 class="text-3xl font-bold text-gray-800">Our Story</h2>
+        </div>
+        <div class="md:flex md:space-x-12 items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <img src="https://images.unsplash.com/photo-1455849318743-b2233052fcff?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Our Beginning" class="rounded-lg shadow-lg w-full">
+            </div>
+            <div class="md:w-1/2">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Our journey began in 2018 with a simple idea: create a platform where passionate writers could share insights and connect with readers hungry for authentic content.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    What started as a small community of writers has grown into a vibrant ecosystem of content creators, thought leaders, and engaged readers from around the world.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Today, we're proud to host thousands of unique voices covering topics ranging from technology and science to art, culture, and personal development.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Mission Section -->
+    <div class="mb-16">
+        <div class="flex items-center mb-8">
+            <i class="fas fa-bullseye text-2xl text-indigo-600 mr-4"></i>
+            <h2 class="text-3xl font-bold text-gray-800">Our Mission</h2>
+        </div>
+        <div class="bg-indigo-50 rounded-lg p-8 shadow-sm">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Inspire Creativity</h3>
+                    <p class="text-gray-600">We aim to spark imagination and foster innovative thinking through quality content.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Build Community</h3>
+                    <p class="text-gray-600">We create spaces where writers and readers can connect, share ideas, and grow together.</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-award text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Promote Excellence</h3>
+                    <p class="text-gray-600">We uphold the highest standards of quality, accuracy, and authenticity in our content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Join Us Section -->
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-700 rounded-xl shadow-xl overflow-hidden">
+        <div class="md:flex items-center">
+            <div class="md:w-2/3 p-8 md:p-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Join Our Community</h2>
+                <p class="text-purple-100 text-lg mb-6">Become part of our growing family of writers, readers, and thought leaders.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="{% url 'login' %}" class="bg-white text-indigo-700 px-6 py-3 rounded-lg font-medium hover:bg-indigo-50 transition duration-300 flex items-center">
+                        <i class="fas fa-user-plus mr-2"></i> Register Now
+                    </a>
+                    <a href="#" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition duration-300 flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i> Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/3 p-8 md:p-12 bg-indigo-800 bg-opacity-50">
+                <div class="text-center">
+                    <div class="inline-block rounded-full bg-white p-3 mb-4">
+                        <i class="fas fa-chart-line text-3xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Our Growth</h3>
+                    <div class="flex justify-center space-x-8 text-white">
+                        <div>
+                            <p class="text-3xl font-bold">500+</p>
+                            <p class="text-sm opacity-75">Writers</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold">10K+</p>
+                            <p class="text-sm opacity-75">Articles</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold">250K+</p>
+                            <p class="text-sm opacity-75">Monthly Readers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

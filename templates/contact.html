@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% block title %}
+Contact Us
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-green-600 to-teal-700 rounded-xl shadow-xl overflow-hidden mb-16">
+        <div class="p-8 md:p-12 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">Contact Us</h1>
+            <p class="text-green-100 text-lg md:max-w-2xl mx-auto">
+                Have questions, feedback, or want to collaborate? We'd love to hear from you! Reach out using any of the methods below.
+            </p>
+        </div>
+    </div>
+
+    <div class="md:flex md:space-x-8 mb-16">
+        <!-- Contact Form -->
+        <div class="md:w-2/3 mb-8 md:mb-0">
+            <div class="flex items-center mb-8">
+                <i class="fas fa-paper-plane text-2xl text-teal-600 mr-4"></i>
+                <h2 class="text-3xl font-bold text-gray-800">Send Us a Message</h2>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <form>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" id="name" name="name" class="pl-10 w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="John Doe">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                                <input type="email" id="email" name="email" class="pl-10 w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="john@example.com">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-tag text-gray-400"></i>
+                            </div>
+                            <input type="text" id="subject" name="subject" class="pl-10 w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="How can we help you?">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                        <div class="relative">
+                            <div class="absolute top-3 left-3 pointer-events-none">
+                                <i class="fas fa-comment-alt text-gray-400"></i>
+                            </div>
+                            <textarea id="message" name="message" rows="6" class="pl-10 w-full border border-gray-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent" placeholder="Tell us what's on your mind..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-teal-500 to-green-600 text-white font-medium py-3 px-6 rounded-lg hover:from-teal-600 hover:to-green-700 transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="md:w-1/3">
+            <div class="flex items-center mb-8">
+                <i class="fas fa-info-circle text-2xl text-teal-600 mr-4"></i>
+                <h2 class="text-3xl font-bold text-gray-800">Contact Info</h2>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-map-marker-alt text-xl text-teal-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Our Location</h3>
+                            <p class="text-gray-600">
+                                1234 Blog Street, Suite 567<br>
+                                San Francisco, CA 94107<br>
+                                United States
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-envelope text-xl text-teal-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Email Us</h3>
+                            <p class="text-gray-600 mb-1">
+                                <span class="font-medium">General Inquiries:</span><br>
+                                <a href="mailto:info@yourblog.com" class="text-teal-600 hover:underline">info@yourblog.com</a>
+                            </p>
+                            <p class="text-gray-600">
+                                <span class="font-medium">Support:</span><br>
+                                <a href="mailto:support@yourblog.com" class="text-teal-600 hover:underline">support@yourblog.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-start">
+                        <div class="bg-teal-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-phone-alt text-xl text-teal-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Call Us</h3>
+                            <p class="text-gray-600 mb-1">
+                                <span class="font-medium">Main Office:</span><br>
+                                <a href="tel:+14155552671" class="text-teal-600 hover:underline">+1 (415) 555-2671</a>
+                            </p>
+                            <p class="text-gray-600">
+                                <span class="font-medium">Customer Support:</span><br>
+                                <a href="tel:+14155552672" class="text-teal-600 hover:underline">+1 (415) 555-2672</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- Social Media Section -->
+    <div class="mb-16">
+        <div class="flex items-center mb-8">
+            <i class="fas fa-share-alt text-2xl text-teal-600 mr-4"></i>
+            <h2 class="text-3xl font-bold text-gray-800">Connect With Us</h2>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <a href="#" class="bg-white rounded-lg shadow-md p-6 flex items-center transition-transform duration-300 hover:transform hover:scale-105 hover:shadow-lg hover:bg-blue-50">
+                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                    <i class="fab fa-facebook-f text-xl text-blue-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Facebook</h3>
+                    <p class="text-gray-500 text-sm">@blogspot</p>
+                </div>
+            </a>
+            
+            <a href="#" class="bg-white rounded-lg shadow-md p-6 flex items-center transition-transform duration-300 hover:transform hover:scale-105 hover:shadow-lg hover:bg-blue-50">
+                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                    <i class="fab fa-twitter text-xl text-blue-400"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Twitter</h3>
+                    <p class="text-gray-500 text-sm">@blogspot</p>
+                </div>
+            </a>
+            
+            <a href="#" class="bg-white rounded-lg shadow-md p-6 flex items-center transition-transform duration-300 hover:transform hover:scale-105 hover:shadow-lg hover:bg-pink-50">
+                <div class="bg-pink-100 p-3 rounded-full mr-4">
+                    <i class="fab fa-instagram text-xl text-pink-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Instagram</h3>
+                    <p class="text-gray-500 text-sm">@blogspot</p>
+                </div>
+            </a>
+            
+            <a href="#" class="bg-white rounded-lg shadow-md p-6 flex items-center transition-transform duration-300 hover:transform hover:scale-105 hover:shadow-lg hover:bg-red-50">
+                <div class="bg-red-100 p-3 rounded-full mr-4">
+                    <i class="fab fa-youtube text-xl text-red-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">YouTube</h3>
+                    <p class="text-gray-500 text-sm">@blogspot</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="mb-16">
+        <div class="flex items-center mb-8">
+            <i class="fas fa-question-circle text-2xl text-teal-600 mr-4"></i>
+            <h2 class="text-3xl font-bold text-gray-800">Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="divide-y divide-gray-200">
+                <div class="py-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-question-circle text-teal-500 mr-2"></i>
+                        How can I become a contributor?
+                    </h3>
+                    <p class="text-gray-600">
+                        To become a contributor, please visit our "Write for Us" page and fill out the application form. Our editorial team will review your application and samples, and get back to you within 5-7 business days.
+                    </p>
+                </div>
+                
+                <div class="py-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-question-circle text-teal-500 mr-2"></i>
+                        How do I report a technical issue?
+                    </h3>
+                    <p class="text-gray-600">
+                        For technical issues, please email our support team at support@yourblog.com with details about the problem you're experiencing. Screenshots and step-by-step descriptions of how to reproduce the issue are very helpful.
+                    </p>
+                </div>
+                
+                <div class="py-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-question-circle text-teal-500 mr-2"></i>
+                        Do you offer advertising opportunities?
+                    </h3>
+                    <p class="text-gray-600">
+                        Yes, we offer various advertising options for brands that align with our values and audience interests. Please contact our advertising team at ads@yourblog.com for our media kit and pricing information.
+                    </p>
+                </div>
+                
+                <div class="py-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center">
+                        <i class="fas fa-question-circle text-teal-500 mr-2"></i>
+                        How can I subscribe to your newsletter?
+                    </h3>
+                    <p class="text-gray-600">
+                        You can subscribe to our newsletter by entering your email address in the subscription box in our footer. We send weekly updates featuring our best content, special offers, and community news.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>{% block title %}Blogger - Dashboard{% endblock %}</title>
+</head>
+
+<body class="bg-gray-100 font-[Montserrat]">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-[#1d294f] text-white flex flex-col">
+            <!-- Logo -->
+            <div class="p-6 flex items-center justify-center border-b border-gray-700">
+                <img src="https://i.postimg.cc/CKxNg6BV/bloglogo.png" alt="Logo" class="w-24 h-24 rounded-full">
+            </div>
+
+            <!-- Menu Items -->
+            <nav class="flex-1 mt-6">
+                <a href="{% url 'blogger_dashboard' %}" class="flex items-center px-6 py-3 hover:bg-gray-700 transition">
+                    <i class="fas fa-home mr-3 text-lg"></i> Dashboard
+                </a>
+                <a href="{% url 'blog_create' %}" class="flex items-center px-6 py-3 hover:bg-gray-700 transition">
+                    <i class="fas fa-pencil-alt mr-3 text-lg"></i> Create Blog
+                </a>
+                <a href="{% url 'manage_blogs' %}" class="flex items-center px-6 py-3 hover:bg-gray-700 transition">
+                    <i class="fas fa-list mr-3 text-lg"></i> My Blogs
+                </a>
+                <a href="{% url 'blogger_inbox' %}" class="flex items-center px-6 py-3 hover:bg-gray-700 transition">
+                    <i class="fas fa-envelope mr-3 text-lg"></i> Messages
+                </a>
+                <a href="{% url 'blogger_profile' %}" class="flex items-center px-6 py-3 hover:bg-gray-700 transition">
+                    <i class="fas fa-user mr-3 text-lg"></i> Profile
+                </a>
+                <a href="{% url 'blogger_logout' %}" class="flex items-center px-6 py-3 hover:bg-red-600 transition">
+                    <i class="fas fa-sign-out-alt mr-3 text-lg"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 p-6">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+
+</html>
